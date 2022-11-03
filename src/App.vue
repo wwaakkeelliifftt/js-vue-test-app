@@ -1,7 +1,8 @@
 <template>
-  <hr/>
   <h1>Application</h1>
   <hr/>
+  <AddTodo
+      @add-new-todo="addNewTodo" />
   <TodoList
       v-bind:todooos="todos"
       @remove-todo-pf="removeTodoParentFunc"
@@ -10,25 +11,33 @@
 
 <script>
 import TodoList from '@/components/TodoList'
+import AddTodo from '@/components/AddTodo'
 
 export default {
   name: 'app',
   data() {
     return {
-      todos: [
-        {id: 1, title: 'Вынести мусор', completed: false},
-        {id: 2, title: 'Купить пыво', completed: true},
-        {id: 3, title: "Купить хлеб", completed: false},
-        {id: 4, title: "Вернуться", completed: false}
-      ]
+      todos: []
     }
   },
   components: {
-    TodoList: TodoList
+    TodoList: TodoList,
+    AddTodo
+  },
+  mounted() {
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=13')
+        .then(response => response.json())
+        .then(json => {
+          console.log(json)
+          this.todos = json
+        })
   },
   methods: {
     removeTodoParentFunc(id) {
       this.todos = this.todos.filter(t => t.id !== id)
+    },
+    addNewTodo(todo) {
+      this.todos.push(todo)
     }
   }
 }

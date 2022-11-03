@@ -2,13 +2,12 @@
   <div>
     <ul>
       <TodoItem
-          v-for="todo_each of $props.todooos"
+          v-for="(todo_each, i) of $props.todooos"
           v-bind:todo="todo_each"
-          v-on:remove-todo="removeTodo"
-      />
+          v-bind:index="i"
+          v-on:remove-todo="removeTodo" />
       <li/>
       <li>todo text</li>
-      <li/>
       {{todooos}}
     </ul>
   </div>
