@@ -1,15 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <hr/>
+  <h1>Application</h1>
+  <hr/>
+  <TodoList
+      v-bind:todooos="todos"
+      @remove-todo-pf="removeTodoParentFunc"
+  />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TodoList from '@/components/TodoList'
 
 export default {
-  name: 'App',
+  name: 'app',
+  data() {
+    return {
+      todos: [
+        {id: 1, title: 'Вынести мусор', completed: false},
+        {id: 2, title: 'Купить пыво', completed: true},
+        {id: 3, title: "Купить хлеб", completed: false},
+        {id: 4, title: "Вернуться", completed: false}
+      ]
+    }
+  },
   components: {
-    HelloWorld
+    TodoList: TodoList
+  },
+  methods: {
+    removeTodoParentFunc(id) {
+      this.todos = this.todos.filter(t => t.id !== id)
+    }
   }
 }
 </script>
