@@ -7,8 +7,7 @@
           v-bind:index="i"
           v-on:remove-todo="removeTodo" />
       <li/>
-      <li>todo text</li>
-      {{todooos}}
+      <li>todo text almost end</li>
     </ul>
   </div>
 </template>

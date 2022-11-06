@@ -1,47 +1,11 @@
 <template>
-  <h1>Application</h1>
-  <hr/>
-  <AddTodo
-      @add-new-todo="addNewTodo" />
-  <TodoList
-      v-bind:todooos="todos"
-      @remove-todo-pf="removeTodoParentFunc"
-  />
+  <div>
+    <h1>Application HEAD App.vue</h1>
+    <hr/>
+    <router-view/>
+  </div>
 </template>
 
-<script>
-import TodoList from '@/components/TodoList'
-import AddTodo from '@/components/AddTodo'
-
-export default {
-  name: 'app',
-  data() {
-    return {
-      todos: []
-    }
-  },
-  components: {
-    TodoList: TodoList,
-    AddTodo
-  },
-  mounted() {
-    fetch('https://jsonplaceholder.typicode.com/todos?_limit=13')
-        .then(response => response.json())
-        .then(json => {
-          console.log(json)
-          this.todos = json
-        })
-  },
-  methods: {
-    removeTodoParentFunc(id) {
-      this.todos = this.todos.filter(t => t.id !== id)
-    },
-    addNewTodo(todo) {
-      this.todos.push(todo)
-    }
-  }
-}
-</script>
 
 <style>
 #app {
