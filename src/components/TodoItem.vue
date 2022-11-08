@@ -4,7 +4,7 @@
       <input type="checkbox" v-on:change="todo.completed = !todo.completed">
       <strong>(id={{todo.id}}) </strong>
       <strong>index={{ index + 1 }}</strong>
-      {{ todo.title }}
+      {{ letterCase(todo) }}
     </span>
     <button
         class="remove"
@@ -17,13 +17,22 @@
 <script>
 export default {
   components: {},
-
   props: {
     todo: {
       type: Object,
       required: true
     },
     index: Number
+  },
+  methods: {
+    letterCase(item) {
+      if (item.completed) {
+        return item.title
+      }
+      else {
+        return item.title.toUpperCase()
+      }
+    }
   }
 }
 </script>
